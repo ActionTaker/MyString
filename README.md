@@ -1,4 +1,6 @@
 # MyString
+## Code
+>
 ``` 
 class MyString{
   char* string; //pointer to string
@@ -7,7 +9,6 @@ class MyString{
 public:
   MyString(const char* str);
   MyString(const MyString& str);
-  
   char operator[](int index);
   void reserve(int size);
   MyString& assign(const MyString& str);
@@ -15,13 +16,13 @@ public:
   MyString& erase(int from, int to);
   MyString operator+(const MyString& str) const;
   MyString& operator=(const MyString& str);  
-
   void print() const;
   void println() const;
   void printinfo() const;
 };
 ```
-# Note
+
+## Note
 
 ## MyString operator+(const MyString& str) const;
 >
@@ -72,8 +73,7 @@ MyString str2 = str+str1; //abc
 str = str1;
 str = str2;
 ```
-와같은 연산만 가능해진다.
-비슷한 윈리로 임시객체의 값을 함수외부에서 바꾸기 싫다면 const MyString 를 반환값으로 설정하면 된다. 하지만
+와같은 연산만 가능해진다. 즉 다음줄로 넘어가기 전까진 무조건 상수화 된다. 하지만 다음줄로 넘어가면 그제한이 풀린다는것을 알수있다. 비슷한 윈리로 임시객체의 값을 함수외부에서 바꾸기 싫다면 const MyString 를 반환값으로 설정하면 된다. 하지만
 ```
 str = str2 = str1;
 ```
@@ -82,6 +82,7 @@ str = str2 = str1;
 str = str2 = str1;
 ```
 는 오류가난다. str2 = str1에서 str2은 상수화 되고 상수화된 str2는 MyString& str 의 매개변수가 될수없다.
+
 ## 정리
 1. (str1 + str2) = str3 와같은 연산을 막아주는것, 즉 str1 + str2 의값을 상수화 시켜주는것은  +연산자의 반환값이다.
 2. str1를 상수화 시켜주는것은 함수
