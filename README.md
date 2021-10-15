@@ -9,13 +9,13 @@ class MyString{
 public:
   MyString(const char* str);
   MyString(const MyString& str);
-  char operator[](int index);
+  char& operator[](int index);
   void reserve(int size);
   MyString& assign(const MyString& str);
   MyString& insert(int index, const MyString& str);
   MyString& erase(int from, int to);
   MyString operator+(const MyString& str) const;
-  MyString& operator=(const MyString& str);  
+  const MyString& operator=(const MyString& str);  
   void print() const;
   void println() const;
   void printinfo() const;
@@ -82,7 +82,17 @@ str = str2 = str1;
 str = str2 = str1;
 ```
 는 오류가난다. str2 = str1에서 str2은 상수화 되고 상수화된 str2는 MyString& str 의 매개변수가 될수없다.
-
+## char& operator[](int index);
+>
+객체와 마찬가지로 특정한 인덱스의 값을 바꾸려면 레퍼런스를 반환형으로 취해야한다. 반환형을 일반형으로 취한다면
+```
+cout << str[0];
+```
+과같은 읽기 연산은 가능하겠지만
+```
+str[0] = 'k';
+```
+와 같은 쓰기연산은 불가능해진다.
 ## 정리
 1. (str1 + str2) = str3 와같은 연산을 막아주는것, 즉 str1 + str2 의값을 상수화 시켜주는것은  +연산자의 반환값이다.
 2. str1를 상수화 시켜주는것은 함수

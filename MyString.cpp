@@ -9,19 +9,16 @@ class MyString{
 public:
   MyString(const char* str);
   MyString(const MyString& str);
-  
-  char operator[](int index);
+  char& operator[](int index);
   void reserve(int size);
   MyString& assign(const MyString& str);
   MyString& insert(int index, const MyString& str);
   MyString& erase(int from, int to);
   MyString operator+(const MyString& str) const;
   const MyString& operator=(const MyString& str);  
-
   void print() const;
   void println() const;
   void printinfo() const;
-
 };
 MyString& MyString::erase(int index, int num)
 {
@@ -65,7 +62,7 @@ MyString::MyString(const MyString& str)
     string[i] = str.string[i];
 }
 
-char MyString::operator[](int index)
+char& MyString::operator[](int index)
 {
   return string[index];
 }
@@ -133,6 +130,7 @@ int main()
   MyString str2 = str+str1; //abc
   (str = str1);
   str = str2 = str1;
+  str[0] = 'k';
   str.printinfo();
 
 
